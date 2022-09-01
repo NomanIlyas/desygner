@@ -6,6 +6,7 @@
 /var/
 /vendor/
 /.idea/
+.idea/
 docker-compose.yml
 
 /config/secrets/prod/prod.decrypt.private.php
