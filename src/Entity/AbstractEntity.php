@@ -19,16 +19,16 @@ abstract class AbstractEntity
     protected int $id;
 
     /**
-     * @ORM\Column(name="created", type="datetime")
+     * @ORM\Column(name="created", type="datetime", nullable=true)
      * @Gedmo\Timestampable(on="create")
      */
-    protected DateTimeInterface $created;
+    protected ?DateTimeInterface $created;
 
     /**
-     * @ORM\Column(name="updated", type="datetime")
+     * @ORM\Column(name="updated", type="datetime", nullable=true)
      * @Gedmo\Timestampable(on="update")
      */
-    protected DateTimeInterface $updated;
+    protected ?DateTimeInterface $updated;
 
     public function getId(): ?int
     {

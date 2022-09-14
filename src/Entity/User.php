@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use DateTimeInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Security\Core\User\UserInterface;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -110,6 +112,30 @@ class User extends AbstractEntity implements UserInterface
      */
     protected ?string $gender = null;
 
+    /**
+     * @Groups({"read"})
+     * @ORM\Column(type="datetime")
+     */
+    protected ?DateTimeInterface $created;
+
+    /**
+     * @Groups({"read"})
+     * @ORM\Column(type="datetime")
+     */
+    protected ?DateTimeInterface $updated;
+
+    /**
+     * @ORM\OneToMany(targetEntity=UserImage::class, mappedBy="user")
+     */
+    private $userImages;
+
+
+    public function __construct() {
+        $currentDateTime = new \DateTime('now');
+        $this->created = $currentDateTime;
+        $this->updated = $currentDateTime;
+        $this->userImages = new ArrayCollection();
+    }
 
     public function getEmail(): ?string
     {
@@ -243,5 +269,35 @@ class User extends AbstractEntity implements UserInterface
     public function eraseCredentials()
     {
         //todo
+    }
+
+    /**
+     * @return Collection<int, UserImage>
+     */
+    public function getUserImages(): Collection
+    {
+        return $this->userImages;
+    }
+
+    public function addUserImage(UserImage $userImage): self
+    {
+        if (!$this->userImages->contains($userImage)) {
+            $this->userImages[] = $userImage;
+            $userImage->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserImage(UserImage $userImage): self
+    {
+        if ($this->userImages->removeElement($userImage)) {
+            // set the owning side to null (unless already changed)
+            if ($userImage->getUser() === $this) {
+                $userImage->setUser(null);
+            }
+        }
+
+        return $this;
     }
 }

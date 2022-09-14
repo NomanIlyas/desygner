@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiProperty;
-use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Doctrine\ORM\Mapping as ORM;
@@ -13,6 +12,7 @@ trait UuidTrait
     /**
      * The internal primary identity key.
      * @ORM\Column(type="uuid", unique=true)
+     * @Groups({"read", "anon"})
      * @ApiProperty(identifier=true)
      */
     protected UuidInterface $uuid;

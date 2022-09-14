@@ -16,10 +16,10 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class ImageRepository extends AbstractRepository
 {
-    public function __construct(ManagerRegistry $registry)
-    {
-        parent::__construct($registry, Image::class);
-    }
+    // public function __construct(ManagerRegistry $registry)
+    // {
+    //     parent::__construct($registry, Image::class);
+    // }
 
 //    /**
 //     * @return Image[] Returns an array of Image objects

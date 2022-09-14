@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTimeInterface;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\TagRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -9,6 +10,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Table;
 use Doctrine\ORM\Mapping\Index;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource()
@@ -29,9 +31,25 @@ class Tag extends AbstractEntity
      */
     private $Image;
 
-    public function __construct()
-    {
+    /**
+     * @Groups({"read"})
+     * @ORM\Column(type="datetime")
+     */
+    protected ?DateTimeInterface $created;
+
+    /**
+     * @Groups({"read"})
+     * @ORM\Column(type="datetime")
+     */
+    protected ?DateTimeInterface $updated;
+
+
+    public function __construct() {
         $this->Image = new ArrayCollection();
+        
+        $currentDateTime = new \DateTime('now');
+        $this->created = $currentDateTime;
+        $this->updated = $currentDateTime;
     }
 
     public function getId(): ?int
