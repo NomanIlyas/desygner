@@ -16,13 +16,13 @@ use App\Entity\User;
  */
 class UserRepository extends AbstractRepository
 {
-    public function __construct(ManagerRegistry $registry)
-    {
-        parent::__construct($registry, User::class);
-    }
+    // public function __construct(ManagerRegistry $registry)
+    // {
+    //     parent::__construct($registry, User::class);
+    // }
 
-    public function findAll()
-    {
-        return $this->findBy(array(), array('id' => 'ASC'));
-    }
+    // public function findAll()
+    // {
+    //     return $this->findBy(array(), array('id' => 'ASC'));
+    // }
 }

@@ -15,3 +15,10 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+
+const script = document.createElement("script");
+script.src = "/js/bootstrap.min.js";
+script.async = true;
+script.onload = () => this.scriptLoaded();
+
+document.body.appendChild(script);

@@ -1,6 +1,8 @@
 parameters:
     env(ELASTICSEARCH_HOST): 'http://localhost:9200'
 api_platform:
+    defaults:
+        pagination_client_enabled: true
     mapping:
         paths: ['%kernel.project_dir%/src/Entity']
     patch_formats:

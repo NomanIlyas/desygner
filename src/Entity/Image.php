@@ -11,22 +11,29 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Table;
 use Doctrine\ORM\Mapping\Index;
 use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Core\Annotation\ApiFilter;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *   normalizationContext={"groups"={"read"}}
+ * )
  * @Table(name="image",indexes={
  *     @Index(name="image_idx", columns={"name", "name"})
  * })
  * @ORM\Entity(repositoryClass=ImageRepository::class)
+ * * @ApiFilter(SearchFilter::class, properties={"tags.name": "partial", "userImages.user.fullName": "partial"})
  */
 class Image extends AbstractEntity
 {
     /**
+     * @Groups({"read"})
      * @ORM\Column(type="string", length=255)
      */
     private $reference;
 
     /**
+     * @Groups({"read"})
      * @ORM\Column(type="string", length=50, nullable=true)
      */
     private $source;
@@ -37,6 +44,7 @@ class Image extends AbstractEntity
     private $tags;
 
     /**
+     * @Groups({"read"})
      * @ORM\Column(type="string", length=100, nullable=true)
      */
     private $name;

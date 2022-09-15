@@ -31,7 +31,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ApiFilter(UuidSearchFilter::class, properties={"uuid": "exact", "userCompanyProfiles.company.uuid": "exact"})
  * @ApiFilter(BooleanFilter::class, properties={"userCompanyProfiles.enabled"})
  * @ApiFilter(OrderFilter::class, properties={"fullName", "displayName"})
- * @ApiResource()
+ * @ApiResource(
+ *   normalizationContext={"groups"={"read"}}
+ * )
  */
 class User extends AbstractEntity implements UserInterface
 {

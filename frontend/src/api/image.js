@@ -1,7 +1,9 @@
 import axios from 'axios';
 
 export const getImages = (params) => {
-    return axios.get(`${process.env.REACT_APP_API_SERVER_PATH}/images`, {}, {
+    return axios.get(`${process.env.REACT_APP_API_SERVER_PATH}/images`, {
+            params
+        }, {
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -22,6 +24,9 @@ export const getImages = (params) => {
                     });
                 }
             }
-            return imagesData
+            return {
+                "images": imagesData,
+                "totalCount": data ? data["hydra:totalItems"] : 0
+            }
         })
 }
