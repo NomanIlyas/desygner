@@ -5,8 +5,9 @@
 
 In root directory run
 2- composer install
-3- bin/console d:m:m
+3- bin/console doctrine:migrations:migrate
 4- symfony serve
+
 
 To create dummy data run
 5- bin/console create:data
