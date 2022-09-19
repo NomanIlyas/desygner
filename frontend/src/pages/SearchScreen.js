@@ -114,7 +114,7 @@ const SearchScreen = () => {
         </div>
         <div className="heading">
             {
-                totalImages && currentPage ? <span className="page-no">Page: {currentPage}/{totalImages}</span> : <></>
+                totalImages && currentPage ? <span className="page-no">Page: {currentPage}/{parseInt(totalImages/30)}</span> : <></>
             }
         </div>
         <div className="card-container">
